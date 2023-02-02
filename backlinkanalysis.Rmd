@@ -1,0 +1,183 @@
+---
+title: "Backlink Analysis"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(readxl)
+library(here)
+library(knitr)
+library(kableExtra)
+```
+
+
+```{r, echo=FALSE}
+## ---- readdata
+pdn <- readxl::read_xlsx(here("data-raw", 
+                              "2022-08-17_07-19_new-explorer-backlinks_fresh_domain_pdn-ac-lk.xlsx"))
+
+cmb <- readxl::read_xlsx(here("data-raw", 
+                              "2022-08-17_07-20_new-explorer-backlinks_fresh_domain_cmb-ac-lk.xlsx"))
+sjp <- readxl::read_xlsx(here("data-raw", 
+                              "2022-08-17_07-20_new-explorer-backlinks_fresh_domain_sjp-ac-lk.xlsx"))
+
+kdu <- readxl::read_xlsx(here("data-raw", 
+                              "2022-08-17_07-21_new-explorer-backlinks_fresh_domain_kdu-ac-lk.xlsx"))
+
+
+kln <- readxl::read_xlsx(here("data-raw", 
+                              "2022-08-17_07-21_new-explorer-backlinks_fresh_domain_kln-ac-lk.xlsx"))
+
+sliit <- readxl::read_xlsx(here("data-raw", 
+                              "2022-08-17_07-21_new-explorer-backlinks_fresh_domain_sliit-lk.xlsx"))
+
+```
+
+# Target URLs
+
+## Number of unique target urls
+
+```{r, echo=FALSE}
+sjpc <- length(unique(sjp$`Target URL`))
+cmbc <- length(unique(cmb$`Target URL`))
+kduc <- length(unique(kdu$`Target URL`))
+klnc <- length(unique(kln$`Target URL`))
+pdnc <- length(unique(pdn$`Target URL`))
+sliitc <- length(unique(sliit$`Target URL`))
+
+tu <- data.frame(University=c("SJP", "CMB", "KDU", "KLN", "PDN", "SLIIT"), Count = c(sjpc, cmbc, kduc, klnc, pdnc, sliitc))
+
+ggplot(tu,aes(x= reorder(University,Count),Count))+geom_bar(stat ="identity") + coord_flip() + geom_text(aes(label = signif(Count)), nudge_y = 35) + xlab("University Code") +ylab("Count")
+```
+
+## Top 20 Target URLs
+
+### University of Sri Jayewardenepura
+
+```{r, echo=FALSE}
+toptarget <- sjp %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### University of Colombo
+
+```{r, echo=FALSE}
+toptarget <- cmb %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### University of Peradeniya
+
+```{r, echo=FALSE}
+toptarget <- pdn %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### University of Kelaniya
+
+```{r, echo=FALSE}
+toptarget <- kln %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### SLIIT
+
+```{r, echo=FALSE}
+toptarget <- sliit %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### KDU
+
+```{r, echo=FALSE}
+toptarget <- kdu %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+# Source link analysis/ Domains
+
+## Number of unique source links/ domains
+
+```{r, echo=FALSE}
+sjps <- length(unique(sjp$`Source URL`))
+cmbs <- length(unique(cmb$`Source URL`))
+kdus <- length(unique(kdu$`Source URL`))
+klns <- length(unique(kln$`Source URL`))
+pdns <- length(unique(pdn$`Source URL`))
+sliits <- length(unique(sliit$`Source URL`))
+
+su <- data.frame(University=c("SJP", "CMB", "KDU", "KLN", "PDN", "SLIIT"), Count = c(sjps, cmbs, kdus, klns, pdns, sliits))
+
+ggplot(su,aes(x= reorder(University,Count),Count))+geom_bar(stat ="identity") + coord_flip() + geom_text(aes(label = signif(Count)), nudge_y = 50) + xlab("University Code") +ylab("Count")
+```
+
+
+# Source Topical Trust Flow
+
+University of Sri Jayewardenepura
+
+```{r, echo=FALSE}
+trustsjp <- sjp %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(10)
+trustsjp %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+University of Colombo
+
+```{r, echo=FALSE}
+trustcmb <- cmb %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(10)
+trustcmb %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+University of Kelaniya
+
+```{r, echo=FALSE}
+trustkln <- kln %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(10)
+trustkln %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+KDU
+
+
+```{r, echo=FALSE}
+trustkdu <- kdu %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(10)
+trustkdu %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+SLIIT
+
+```{r, echo=FALSE}
+trustsliit <- sliit %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(10)
+trustsliit %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+
+
+
