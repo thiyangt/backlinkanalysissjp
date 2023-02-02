@@ -27,6 +27,8 @@ library(here)
 library(knitr)
 library(kableExtra)
 library(plotly)
+library(patchwork)
+library(ggridges)
 ```
 
 
@@ -96,47 +98,453 @@ p2
 
 # Source Link (Trust and Ciations Flow)
 
-# 2
+
+```{r}
+sjp1 <- ggplot(sjp, aes(x=`Source Trust Flow`, y=`Source Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("SJP - 0.53") 
+cmb1 <- ggplot(cmb, aes(x=`Source Trust Flow`, y=`Source Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("CMB - 0.51")
+pdn1 <- ggplot(pdn, aes(x=`Source Trust Flow`, y=`Source Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("PDN - 0.64")
+kln1 <- ggplot(kln, aes(x=`Source Trust Flow`, y=`Source Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("KLN - 0.64")
+sliit1 <- ggplot(sliit, aes(x=`Source Trust Flow`, y=`Source Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("SLIIT - 0.63")
+kdu1 <- ggplot(kdu, aes(x=`Source Trust Flow`, y=`Source Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("KDU - 0.61")
+(sjp1+cmb1+pdn1)/(kln1+sliit1+kdu1)
+```
+
+
+
+```{r, eval=FALSE}
+sjp %>% select(c(`Source Trust Flow`, `Source Citation Flow`)) %>% summarize(SJP = cor(`Source Trust Flow`, `Source Citation Flow`)) %>% kable()
+
+cmb %>% select(c(`Source Trust Flow`, `Source Citation Flow`)) %>% summarize(CMB = cor(`Source Trust Flow`, `Source Citation Flow`)) %>% kable()
+
+pdn %>% select(c(`Source Trust Flow`, `Source Citation Flow`)) %>% summarize(PDN = cor(`Source Trust Flow`, `Source Citation Flow`)) %>% kable()
+
+kln %>% select(c(`Source Trust Flow`, `Source Citation Flow`)) %>% summarize(KLN = cor(`Source Trust Flow`, `Source Citation Flow`)) %>% kable()
+
+sliit %>% select(c(`Source Trust Flow`, `Source Citation Flow`)) %>% summarize(SLIIT = cor(`Source Trust Flow`, `Source Citation Flow`)) %>% kable()
+
+kdu %>% select(c(`Source Trust Flow`, `Source Citation Flow`)) %>% summarize(KDU = cor(`Source Trust Flow`, `Source Citation Flow`)) %>% kable()
+
+
+
+
+
+
+
+```
+
+# Target (Trust and Ciations Flow)
+
+
+```{r}
+sjp3 <- ggplot(sjp, aes(x=`Target Trust Flow`, y=`Target Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("SJP") 
+cmb3 <- ggplot(cmb, aes(x=`Target Trust Flow`, y=`Target Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("CMB")
+pdn3 <- ggplot(pdn, aes(x=`Target Trust Flow`, y=`Target Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("PDN")
+kln3 <- ggplot(kln, aes(x=`Target Trust Flow`, y=`Target Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("KLN")
+sliit3 <- ggplot(sliit, aes(x=`Target Trust Flow`, y=`Target Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("SLIIT")
+kdu3 <- ggplot(kdu, aes(x=`Target Trust Flow`, y=`Target Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("KDU")
+(sjp3+cmb3+pdn3)/(kln3+sliit3+kdu3)
+```
+
+#### Correlation coefficient
+
+```{r}
+sjp %>% select(c(`Target Trust Flow`, `Target Citation Flow`)) %>% summarize(SJP = cor(`Target Trust Flow`, `Target Citation Flow`)) %>% kable()
+
+cmb %>% select(c(`Target Trust Flow`, `Target Citation Flow`)) %>% summarize(CMB = cor(`Target Trust Flow`, `Target Citation Flow`)) %>% kable()
+
+pdn %>% select(c(`Target Trust Flow`, `Target Citation Flow`)) %>% summarize(PDN = cor(`Target Trust Flow`, `Target Citation Flow`)) %>% kable()
+
+kln %>% select(c(`Target Trust Flow`, `Target Citation Flow`)) %>% summarize(KLN = cor(`Target Trust Flow`, `Target Citation Flow`)) %>% kable()
+
+sliit %>% select(c(`Target Trust Flow`, `Target Citation Flow`)) %>% summarize(SLIIT = cor(`Target Trust Flow`, `Target Citation Flow`)) %>% kable()
+
+kdu %>% select(c(`Target Trust Flow`, `Target Citation Flow`)) %>% summarize(KDU = cor(`Target Trust Flow`, `Target Citation Flow`)) %>% kable()
+
+
+```
+
+# Domain (Trust and Ciations Flow)
+
+
+```{r}
+sjp2 <- ggplot(sjp, aes(x=`Domain Trust Flow`, y=`Domain Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("SJP") 
+cmb2 <- ggplot(cmb, aes(x=`Domain Trust Flow`, y=`Domain Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("CMB")
+pdn2 <- ggplot(pdn, aes(x=`Domain Trust Flow`, y=`Domain Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("PDN")
+kln2 <- ggplot(kln, aes(x=`Domain Trust Flow`, y=`Domain Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("KLN")
+sliit2 <- ggplot(sliit, aes(x=`Domain Trust Flow`, y=`Domain Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("SLIIT")
+kdu2 <- ggplot(kdu, aes(x=`Domain Trust Flow`, y=`Domain Citation Flow`)) +geom_point(alpha=0.5) + ggtitle("KDU")
+(sjp2+cmb2+pdn2)/(kln2+sliit2+kdu2)
+```
+
+#### Correlation coefficient
+
+```{r}
+sjp %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`)) %>% summarize(SJP = cor(`Domain Trust Flow`, `Domain Citation Flow`)) %>% kable()
+
+cmb %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`)) %>% summarize(CMB = cor(`Domain Trust Flow`, `Domain Citation Flow`)) %>% kable()
+
+pdn %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`)) %>% summarize(PDN = cor(`Domain Trust Flow`, `Domain Citation Flow`)) %>% kable()
+
+kln %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`)) %>% summarize(KLN = cor(`Domain Trust Flow`, `Domain Citation Flow`)) %>% kable()
+
+sliit %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`)) %>% summarize(SLIIT = cor(`Domain Trust Flow`, `Domain Citation Flow`)) %>% kable()
+
+kdu %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`)) %>% summarize(KDU = cor(`Domain Trust Flow`, `Domain Citation Flow`)) %>% kable()
+
+
+```
+
+
+# Summary statistics
 
 Column {data-width=650 .tabset}
 -----------------------------------------------------------------------
 
-### Total number of unique source links
-
-
-```{r, echo=FALSE}
-sjpc <- length(unique(sjp$`Target URL`))
-cmbc <- length(unique(cmb$`Target URL`))
-kduc <- length(unique(kdu$`Target URL`))
-klnc <- length(unique(kln$`Target URL`))
-pdnc <- length(unique(pdn$`Target URL`))
-sliitc <- length(unique(sliit$`Target URL`))
-
-tu <- data.frame(University=c("SJP", "CMB", "KDU", "KLN", "PDN", "SLIIT"), Count = c(sjpc, cmbc, kduc, klnc, pdnc, sliitc))
-
-ggplot(tu,aes(x= reorder(University,Count),Count))+geom_bar(stat ="identity") + coord_flip() + geom_text(aes(label = signif(Count)), nudge_y = 35) + xlab("University Code") +ylab("Count")
-```
-
-
-### Chart B
+#### Summary statistics: source trust flow
 
 ```{r}
+SJP <- sjp %>% select(c(`Source Trust Flow`, `Source Citation Flow`))
+SJP <- SJP %>% pivot_longer(1:2, "type", "value")
+
+PDN <- pdn %>% select(c(`Source Trust Flow`, `Source Citation Flow`))
+PDN <- PDN %>% pivot_longer(1:2, "type", "value")
+
+CMB <- cmb %>% select(c(`Source Trust Flow`, `Source Citation Flow`))
+CMB <- CMB %>% pivot_longer(1:2, "type", "value")
+
+KLN <- kln %>% select(c(`Source Trust Flow`, `Source Citation Flow`))
+KLN <- KLN %>% pivot_longer(1:2, "type", "value")
+
+SLIIT <- sliit %>% select(c(`Source Trust Flow`, `Source Citation Flow`))
+SLIIT <- SLIIT %>% pivot_longer(1:2, "type", "value")
+
+KDU <- kdu %>% select(c(`Source Trust Flow`, `Source Citation Flow`))
+KDU <- KDU %>% pivot_longer(1:2, "type", "value")
+
+institution <- c(rep("SJP" , dim(SJP)[1]), 
+                 rep("PDN" , dim(PDN)[1]),
+                 rep("CMB" , dim(CMB)[1]),
+                 rep("KLN" , dim(KLN)[1]),
+                 rep("SLIIT" , dim(SLIIT)[1]),
+                 rep("KDU" , dim(KDU)[1]))
+
+all <- bind_rows(SJP, PDN, CMB, KLN, SLIIT, KDU)
+all$institution <- institution
+
+all %>% filter(type=="Source Trust Flow") %>% group_by(institution) %>%
+  summarise(mean = mean(value), median = median(value), sd = sd(value), maximum = max(value), n=n()) %>% arrange(desc(n)) %>%  kbl(align = "l") %>% 
+    kable_styling()
+  
+
 
 ```
 
-Column {data-width=350}
+
+#### Summary statistics: source citation flow
+
+```{r}
+all %>% filter(type=="Source Citation Flow") %>% group_by(institution) %>%
+  summarise(mean = mean(value), median = median(value), sd = sd(value), maximum = max(value), n=n()) %>% arrange(desc(n)) %>%  kbl(align = "l") %>% 
+    kable_styling()
+```
+
+Column {data-width=650 .tabset}
 -----------------------------------------------------------------------
 
-### Chart C
+#### Summary statistics: domain trust flow
 
 ```{r}
+SJP <- sjp %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`))
+SJP <- SJP %>% pivot_longer(1:2, "type", "value")
+
+PDN <- pdn %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`))
+PDN <- PDN %>% pivot_longer(1:2, "type", "value")
+
+CMB <- cmb %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`))
+CMB <- CMB %>% pivot_longer(1:2, "type", "value")
+
+KLN <- kln %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`))
+KLN <- KLN %>% pivot_longer(1:2, "type", "value")
+
+SLIIT <- sliit %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`))
+SLIIT <- SLIIT %>% pivot_longer(1:2, "type", "value")
+
+KDU <- kdu %>% select(c(`Domain Trust Flow`, `Domain Citation Flow`))
+KDU <- KDU %>% pivot_longer(1:2, "type", "value")
+
+institution <- c(rep("SJP" , dim(SJP)[1]), 
+                 rep("PDN" , dim(PDN)[1]),
+                 rep("CMB" , dim(CMB)[1]),
+                 rep("KLN" , dim(KLN)[1]),
+                 rep("SLIIT" , dim(SLIIT)[1]),
+                 rep("KDU" , dim(KDU)[1]))
+
+all <- bind_rows(SJP, PDN, CMB, KLN, SLIIT, KDU)
+all$institution <- institution
+
+all %>% filter(type=="Domain Trust Flow") %>% group_by(institution) %>%
+  summarise(mean = mean(value), median = median(value), sd = sd(value), maximum = max(value), n=n()) %>% arrange(desc(n)) %>%  kbl(align = "l") %>% 
+    kable_styling()
+  
+
 
 ```
 
-### Chart D
+
+#### Summary statistics: domain citation flow
 
 ```{r}
+all %>% filter(type=="Domain Citation Flow") %>% group_by(institution) %>%
+  summarise(mean = mean(value), median = median(value), sd = sd(value), maximum = max(value), n=n()) %>% arrange(desc(n)) %>%  kbl(align = "l") %>% 
+    kable_styling()
+```
+
+
+Column {data-width=650 .tabset}
+-----------------------------------------------------------------------
+
+#### Summary statistics: target trust flow
+
+```{r}
+SJP <- sjp %>% select(c(`Target Trust Flow`, `Target Citation Flow`))
+SJP <- SJP %>% pivot_longer(1:2, "type", "value")
+
+PDN <- pdn %>% select(c(`Target Trust Flow`, `Target Citation Flow`))
+PDN <- PDN %>% pivot_longer(1:2, "type", "value")
+
+CMB <- cmb %>% select(c(`Target Trust Flow`, `Target Citation Flow`))
+CMB <- CMB %>% pivot_longer(1:2, "type", "value")
+
+KLN <- kln %>% select(c(`Target Trust Flow`, `Target Citation Flow`))
+KLN <- KLN %>% pivot_longer(1:2, "type", "value")
+
+SLIIT <- sliit %>% select(c(`Target Trust Flow`, `Target Citation Flow`))
+SLIIT <- SLIIT %>% pivot_longer(1:2, "type", "value")
+
+KDU <- kdu %>% select(c(`Target Trust Flow`, `Target Citation Flow`))
+KDU <- KDU %>% pivot_longer(1:2, "type", "value")
+
+institution <- c(rep("SJP" , dim(SJP)[1]), 
+                 rep("PDN" , dim(PDN)[1]),
+                 rep("CMB" , dim(CMB)[1]),
+                 rep("KLN" , dim(KLN)[1]),
+                 rep("SLIIT" , dim(SLIIT)[1]),
+                 rep("KDU" , dim(KDU)[1]))
+
+all <- bind_rows(SJP, PDN, CMB, KLN, SLIIT, KDU)
+all$institution <- institution
+
+all %>% filter(type=="Target Trust Flow") %>% group_by(institution) %>%
+  summarise(mean = mean(value), median = median(value), sd = sd(value), maximum = max(value), n=n()) %>% arrange(desc(n)) %>%  kbl(align = "l") %>% 
+    kable_styling()
+  
+
 
 ```
 
-# 2
+
+#### Summary statistics: target citation flow
+
+```{r}
+all %>% filter(type=="Target Citation Flow") %>% group_by(institution) %>%
+  summarise(mean = mean(value), median = median(value), sd = sd(value), maximum = max(value), n=n()) %>% arrange(desc(n)) %>%  kbl(align = "l") %>% 
+    kable_styling()
+```
+
+
+
+# Top target URL
+
+Column {data-width=650 .tabset}
+-----------------------------------------------------------------------
+
+### SJP
+
+```{r}
+toptarget <- sjp %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### CMB
+
+```{r, echo=FALSE}
+toptarget <- cmb %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### PDN
+
+```{r, echo=FALSE}
+toptarget <- pdn %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### KLN
+
+```{r, echo=FALSE}
+toptarget <- kln %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### SLIIT
+
+```{r, echo=FALSE}
+toptarget <- sliit %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+### KDU
+
+```{r, echo=FALSE}
+toptarget <- kdu %>%
+  count(`Target URL`, sort=TRUE) %>% top_n(20)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+
+
+
+# Top 5 Source Topical Trust Flow Topic 0
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+#### SJP
+
+```{r}
+st <- sjp %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(5)
+st %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+#### CMB
+
+```{r, echo=FALSE}
+toptarget <- cmb %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+#### PDN
+
+```{r, echo=FALSE}
+toptarget <- pdn %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+#### KLN
+
+```{r, echo=FALSE}
+toptarget <- kln %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+#### SLIIT
+
+```{r, echo=FALSE}
+toptarget <- sliit %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+#### KDU
+
+```{r, echo=FALSE}
+toptarget <- kdu %>%
+  count(`Source Topical Trust Flow Topic 0`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+# Top 5 Source Topical Trust Flow Topic 1
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+#### SJP
+
+```{r}
+st <- sjp %>%
+  count(`Source Topical Trust Flow Topic 1`, sort=TRUE) %>% top_n(5)
+st %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+#### CMB
+
+```{r, echo=FALSE}
+toptarget <- cmb %>%
+  count(`Source Topical Trust Flow Topic 1`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+#### PDN
+
+```{r, echo=FALSE}
+toptarget <- pdn %>%
+  count(`Source Topical Trust Flow Topic 1`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+#### KLN
+
+```{r, echo=FALSE}
+toptarget <- kln %>%
+  count(`Source Topical Trust Flow Topic 1`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+#### SLIIT
+
+```{r, echo=FALSE}
+toptarget <- sliit %>%
+  count(`Source Topical Trust Flow Topic 1`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+#### KDU
+
+```{r, echo=FALSE}
+toptarget <- kdu %>%
+  count(`Source Topical Trust Flow Topic 1`, sort=TRUE) %>% top_n(5)
+toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
+  kableExtra::kable_styling(full_width = F)
+```
+
+
+
+
