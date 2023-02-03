@@ -547,4 +547,66 @@ toptarget %>% kable( "html", table.attr = "style='width:10%;'") %>%
 
 
 
+# Backlink Analysis
+
+```{r}
+## ---- readdata
+pdnb <- read_csv(here("backlinks", "pdn.csv"))
+cmbb <- read_csv(here("backlinks", "cmb.csv"))
+kdub <- read_csv(here("backlinks", "kdu.csv"))
+klnb <- read_csv(here("backlinks", "kln.csv"))
+sjpb <- read_csv(here("backlinks", "sjp.csv"))
+iitdb <- read_csv(here("backlinks", "iitd.csv"))
+```
+
+
+Column {data-width=650 .tabset}
+-----------------------------------------------------------------------
+
+### SJP
+
+```{r}
+sj <- sjpb %>% select(c("Total Backlinks", "Referring Page URL")) %>% arrange(desc(`Total Backlinks`))
+sj[1:20,] %>% kable("html") %>%
+  kable_styling(full_width = F)
+#sjpb
+```
+
+ ### CMB
+
+```{r}
+cj <- cmbb %>% select(c("Total Backlinks", "Referring Page URL")) %>% arrange(desc(`Total Backlinks`))
+cj[1:20,] %>% kable("html") %>%
+  kable_styling(full_width = F)
+#sjpb
+```
+
+
+### PDN
+
+```{r}
+pj <- pdnb %>% select(c("Total Backlinks", "Referring Page URL")) %>% arrange(desc(`Total Backlinks`))
+pj[1:20,] %>% kable("html") %>%
+  kable_styling(full_width = F)
+#sjpb
+```
+
+### KDU
+
+```{r}
+kj <- kdub %>% select(c("Total Backlinks", "Referring Page URL")) %>% arrange(desc(`Total Backlinks`))
+kj[1:20,] %>% kable("html") %>%
+  kable_styling(full_width = F)
+#sjpb
+```
+
+### IITD
+
+```{r}
+ij <- iitdb %>% select(c("Total Backlinks", "Referring Page URL")) %>% arrange(desc(`Total Backlinks`))
+ij[1:20,] %>% kable("html") %>%
+  kable_styling(full_width = F)
+#sjpb
+```
+
 
